@@ -76,6 +76,14 @@ module.exports = function(opts, uglify) {
       );
     }
 
+		if(opts.skipList){
+			for(var r of opts.skipList){
+				if(r.test(file.relative)){
+					return callback(null, file);
+				}
+			}
+		}
+
     var mangled = trycatch(
       function() {
         var map = {};
